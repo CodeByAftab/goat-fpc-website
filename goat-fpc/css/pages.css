@@ -204,11 +204,11 @@
 
 /* ---- Hero Stats (inline in hero) ---- */
 .hero-stats {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-lg);
   padding: var(--space-xl) 0;
   justify-content: center;
-  flex-wrap: wrap;
   margin-top: var(--space-xl);
 }
 
@@ -248,10 +248,11 @@
 @media (max-width: 768px) {
   .hero-stats {
     gap: var(--space-md);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .hero-stats__item {
-    min-width: 120px;
+    min-width: auto;
   }
 
   .hero-stats__number {
@@ -335,10 +336,10 @@
 }
 
 .impact-grid {
-  display: flex;
-  gap: var(--space-xl);
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-lg);
+  justify-items: center;
 }
 
 .impact-card {
@@ -348,8 +349,7 @@
   padding: var(--space-lg);
   text-align: center;
   border: 1px solid var(--color-border);
-  min-width: 180px;
-  flex: 1;
+  width: 100%;
 }
 
 .impact-card__icon {
@@ -366,9 +366,10 @@
 
 .impact-card__number {
   font-family: var(--font-heading);
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: var(--weight-bold);
   color: var(--color-text);
+  white-space: nowrap;
 }
 
 .impact-card__label {
@@ -378,7 +379,17 @@
 
 @media (max-width: 768px) {
   .impact-card {
-    min-width: 140px;
+    min-width: auto;
+  }
+
+  .impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .impact-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -648,22 +659,16 @@
 }
 
 .gallery-item:nth-child(1) {
-  grid-row: span 2;
+  grid-row: span 1;
 }
 
 .gallery-item:nth-child(4) {
-  grid-column: span 2;
+  grid-column: span 1;
 }
 
 @media (max-width: 768px) {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .gallery-item:nth-child(1),
-  .gallery-item:nth-child(4) {
-    grid-row: span 1;
-    grid-column: span 1;
   }
 }
 
@@ -713,8 +718,9 @@
 }
 
 .cta-banner .btn--secondary {
+  background: transparent;
   color: var(--color-white);
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .cta-banner .btn--secondary:hover {
