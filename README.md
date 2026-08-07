@@ -59,11 +59,6 @@ goat-fpc/
 | Body font | DM Sans |
 | Border radius | 14px |
 
-## Registration
-
-- **CIN:** U01441CT2026PTC019871
-- **Registered Office:** Raipur, Chhattisgarh, India
-
 ## License
 
 © 2026 Goat Agri Farmer Producer Company Limited. All Rights Reserved.
