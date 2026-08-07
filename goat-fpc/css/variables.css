@@ -1,0 +1,117 @@
+/* ============================================
+   Goat Agri FPC — Design Tokens
+   ============================================ */
+
+:root {
+  /* ---- Colors ---- */
+  --color-green:         #1B4332;
+  --color-green-light:   #2D6A4F;
+  --color-green-dark:    #143326;
+  --color-green-50:      #E8F5EC;
+  --color-green-100:     #C6E6D0;
+  --color-amber:         #C8962E;
+  --color-amber-light:   #D4A94A;
+  --color-amber-dark:    #A67B1E;
+  --color-cream:         #F8F4EE;
+  --color-cream-dark:    #EDE7DB;
+  --color-beige:         #F5F0E8;
+  --color-beige-dark:    #E8E0D2;
+  --color-white:         #FFFFFF;
+  --color-black:         #000000;
+  --color-gray-50:       #F9FAFB;
+  --color-gray-100:      #F3F4F6;
+  --color-gray-200:      #E5E7EB;
+  --color-gray-300:      #D1D5DB;
+  --color-gray-400:      #9CA3AF;
+  --color-gray-500:      #6B7280;
+  --color-gray-600:      #4B5563;
+  --color-gray-700:      #374151;
+  --color-gray-800:      #1F2937;
+  --color-gray-900:      #111827;
+
+  /* Semantic colors */
+  --color-text:          #2D2D2D;
+  --color-text-muted:    #6B7280;
+  --color-text-light:    var(--color-white);
+  --color-bg:            var(--color-cream);
+  --color-bg-alt:        var(--color-white);
+  --color-primary:       var(--color-green);
+  --color-primary-hover: var(--color-green-dark);
+  --color-accent:        var(--color-amber);
+  --color-accent-hover:  var(--color-amber-dark);
+  --color-border:        #E5DFD5;
+  --color-success:       #16A34A;
+  --color-error:         #DC2626;
+
+  /* Decorative */
+  --color-terracotta:       #B5651D;
+  --color-terracotta-light: #D4883A;
+  --color-terracotta-dark:  #8A4E16;
+
+  /* ---- Typography ---- */
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'DM Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-md:   1.125rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  1.875rem;
+  --text-3xl:  2.25rem;
+  --text-4xl:  3rem;
+  --text-5xl:  3.75rem;
+
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.6;
+  --leading-loose:  1.8;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold: 600;
+  --weight-bold:    700;
+
+  /* ---- Spacing ---- */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  /* ---- Layout ---- */
+  --max-width:     1200px;
+  --max-width-narrow: 800px;
+  --gutter:        var(--space-lg);
+  --header-height: 80px;
+
+  /* ---- Border Radius ---- */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --radius-full: 9999px;
+
+  /* ---- Shadows ---- */
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md:   0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg:   0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-xl:   0 16px 48px rgba(0, 0, 0, 0.12);
+
+  /* ---- Transitions ---- */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+
+  /* ---- Z-index ---- */
+  --z-nav:   100;
+  --z-modal: 200;
+  --z-toast: 300;
+}

@@ -1,0 +1,112 @@
+/* ============================================
+   Goat FPC — Print Styles
+   ============================================ */
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+    color: #000 !important;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    font-weight: normal;
+    color: #555 !important;
+  }
+
+  a[href^="tel"]::after,
+  a[href^="mailto"]::after {
+    content: none;
+  }
+
+  nav, .site-header, .site-footer,
+  .nav-toggle, .btn, .trust-ledger,
+  .hero__bg, .hero__overlay {
+    display: none !important;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+
+  .hero__title {
+    font-size: 24pt;
+    color: #000 !important;
+  }
+
+  .hero__desc {
+    font-size: 12pt;
+    color: #333 !important;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  p, li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .section {
+    padding: 1.5rem 0;
+    page-break-inside: avoid;
+  }
+
+  .card,
+  .project-card,
+  .team-card,
+  .value-card {
+    border: 1px solid #ccc !important;
+    page-break-inside: avoid;
+  }
+
+  .form-input,
+  .form-textarea,
+  .form-select {
+    border: 1px solid #999 !important;
+    padding: 4pt;
+  }
+
+  .page-header {
+    padding: 1rem 0;
+    border-bottom: 2px solid #000;
+  }
+
+  .page-header h1 {
+    color: #000 !important;
+  }
+
+  .page-header p {
+    color: #333 !important;
+  }
+}
