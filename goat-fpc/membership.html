@@ -7,11 +7,438 @@
   <link rel="canonical" href="https://goatfpc.in/membership.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/variables.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/pages.css">
+  <style>
+    .membership-hero {
+      background: var(--color-cream);
+      padding: calc(var(--header-height) + var(--space-4xl)) 0 var(--space-4xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .membership-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l20 20-20 20L0 20z' fill='%231B4332' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .membership-hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .membership-hero__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .membership-hero__title {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--text-5xl);
+      font-weight: 700;
+      color: var(--color-green);
+      line-height: 1.1;
+    }
+
+    .membership-hero__subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--color-secondary);
+    }
+
+    .membership-hero__text {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      max-width: 48ch;
+      line-height: 1.7;
+    }
+
+    .membership-hero__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      margin-top: var(--space-md);
+    }
+
+    .membership-hero__badge {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-full);
+    }
+
+    .membership-hero__badge-avatars {
+      display: flex;
+      margin-right: var(--space-xs);
+    }
+
+    .membership-hero__badge-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: -8px;
+    }
+
+    .membership-hero__badge-avatar:first-child {
+      background: var(--color-green-100);
+    }
+
+    .membership-hero__badge-avatar:last-child {
+      background: var(--color-secondary);
+    }
+
+    .membership-hero__badge-text {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    .membership-hero__badge-text strong {
+      color: var(--color-green);
+      font-weight: 700;
+    }
+
+    .membership-hero__image {
+      position: relative;
+      height: 500px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--color-border);
+    }
+
+    .membership-hero__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .membership-hero__image-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--color-green-50) 0%, var(--color-green-100) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .membership-hero__image-placeholder svg {
+      width: 60%;
+      height: 60%;
+      opacity: 0.3;
+    }
+
+    @media (max-width: 768px) {
+      .membership-hero__inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .membership-hero__title {
+        font-size: var(--text-3xl);
+      }
+
+      .membership-hero__text {
+        margin-inline: auto;
+      }
+
+      .membership-hero__actions {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .membership-hero__image {
+        height: 300px;
+      }
+    }
+
+    /* Divider */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2xl) 0;
+      opacity: 0.5;
+    }
+
+    .section-divider svg {
+      width: 32px;
+      height: 32px;
+      color: var(--color-outline);
+    }
+
+    /* Benefits & Eligibility Bento Grid */
+    .bento-section {
+      padding: var(--space-4xl) 0;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: var(--space-2xl);
+    }
+
+    .bento-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--color-green);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-xl);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .bento-section-title svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-secondary);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .benefit-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      transition: box-shadow var(--transition-base);
+    }
+
+    .benefit-card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .benefit-card__icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-green-100);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+      color: var(--color-green);
+    }
+
+    .benefit-card__icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .benefit-card__title {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-green);
+      margin-bottom: var(--space-sm);
+    }
+
+    .benefit-card__text {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .eligibility-card {
+      background: var(--color-surface-container-low);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+    }
+
+    .eligibility-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .eligibility-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .eligibility-item svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-green);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .eligibility-item p {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Membership Process Timeline */
+    .process-section {
+      background: var(--color-surface-bright);
+      padding: var(--space-4xl) 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .process-section__title {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--color-green);
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .process-timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .process-timeline::before {
+      content: "";
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--color-outline-variant);
+      z-index: 0;
+    }
+
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+      z-index: 1;
+      background: var(--color-surface-bright);
+      padding: 0 var(--space-sm);
+    }
+
+    .process-step__icon {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-full);
+      background: var(--color-white);
+      border: 2px solid var(--color-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .process-step__icon svg {
+      width: 32px;
+      height: 32px;
+      color: var(--color-green);
+    }
+
+    .process-step__number {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: var(--color-green);
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-sm);
+      font-weight: 700;
+    }
+
+    .process-step__title {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-green);
+      text-align: center;
+      margin-bottom: var(--space-sm);
+    }
+
+    .process-step__text {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .process-step--highlight .process-step__icon {
+      border-color: var(--color-secondary);
+    }
+
+    .process-step--highlight .process-step__number {
+      background: var(--color-secondary);
+    }
+
+    .process-step--highlight .process-step__icon svg {
+      color: var(--color-secondary);
+    }
+
+    .process-step--highlight .process-step__title {
+      color: var(--color-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .process-timeline {
+        flex-direction: column;
+        gap: var(--space-xl);
+      }
+
+      .process-timeline::before {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -19,316 +446,300 @@
 
   <main>
 
-  <!-- Hero Section -->
-  <section class="hero hero--inner hero--dark">
-    <div class="container">
-      <h1 class="hero__title">Membership</h1>
-      <p style="font-family: var(--font-heading); font-size: var(--text-xl); color: var(--color-amber-light); margin-bottom: var(--space-md);">Join Hands. Grow Together.</p>
-      <p class="hero__subtitle">Become a member of Goat Agri FPC and enjoy exclusive benefits, support and opportunities to grow with us.</p>
-      <div style="display: flex; align-items: center; gap: var(--space-xl); margin-top: var(--space-xl);">
-        <a href="#apply" class="btn btn--accent btn--lg">Apply Online Now <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        <div style="display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.8);">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>1,500+ Farmers Already Associated</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefits & Eligibility Section -->
-  <section class="section">
-    <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3xl);">
-        
-        <!-- Left: Benefits of Membership -->
-        <div>
-          <h2 class="section__title">Benefits of Membership</h2>
-          <p class="section__subtitle">Why join Goat Agri FPC?</p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-top: var(--space-xl);">
-            
-            <!-- Benefit 1: Better Income -->
-            <div class="card" style="padding: var(--space-lg); border-left: 4px solid var(--color-green);">
-              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                <h3 style="font-size: var(--text-lg); font-weight: 600;">Better Income</h3>
+    <!-- Hero Section -->
+    <section class="membership-hero">
+      <div class="container">
+        <div class="membership-hero__inner">
+          <div class="membership-hero__content">
+            <h1 class="membership-hero__title">Membership</h1>
+            <h2 class="membership-hero__subtitle">Join Hands. Grow Together.</h2>
+            <p class="membership-hero__text">Become a member of Goat Agri FPC and enjoy exclusive benefits, support and opportunities to grow with us.</p>
+            <div class="membership-hero__actions">
+              <a href="#apply" class="btn btn--primary btn--lg">
+                Apply Online Now
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <div class="membership-hero__badge">
+                <div class="membership-hero__badge-avatars">
+                  <div class="membership-hero__badge-avatar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div class="membership-hero__badge-avatar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                </div>
+                <div class="membership-hero__badge-text">
+                  <strong>1,500+</strong> Farmers<br>Already Associated
+                </div>
               </div>
-              <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Get better prices through collective bargaining and market access.</p>
             </div>
-
-            <!-- Benefit 2: Expert Support -->
-            <div class="card" style="padding: var(--space-lg); border-left: 4px solid var(--color-green);">
-              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                <h3 style="font-size: var(--text-lg); font-weight: 600;">Expert Support</h3>
-              </div>
-              <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Access to veterinary care, breeding advice, and technical guidance.</p>
+          </div>
+          <div class="membership-hero__image">
+            <div class="membership-hero__image-placeholder">
+              <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 40C80 40 65 55 65 75C65 95 75 105 85 115C90 120 90 130 90 140H110C110 130 110 120 115 115C125 105 135 95 135 75C135 55 120 40 100 40Z" fill="#1B4332"/>
+                <circle cx="85" cy="70" r="6" fill="white"/>
+                <circle cx="115" cy="70" r="6" fill="white"/>
+                <path d="M75 55L55 30" stroke="#1B4332" stroke-width="4" stroke-linecap="round"/>
+                <path d="M125 55L145 30" stroke="#1B4332" stroke-width="4" stroke-linecap="round"/>
+              </svg>
             </div>
-
-            <!-- Benefit 3: Quality Resources -->
-            <div class="card" style="padding: var(--space-lg); border-left: 4px solid var(--color-green);">
-              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                <h3 style="font-size: var(--text-lg); font-weight: 600;">Quality Resources</h3>
-              </div>
-              <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Get access to quality feed, medicines, and farming equipment.</p>
-            </div>
-
-            <!-- Benefit 4: Insurance Benefits -->
-            <div class="card" style="padding: var(--space-lg); border-left: 4px solid var(--color-green);">
-              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <h3 style="font-size: var(--text-lg); font-weight: 600;">Insurance Benefits</h3>
-              </div>
-              <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Livestock insurance coverage to protect your investment.</p>
-            </div>
-
-            <!-- Benefit 5: Collective Strength -->
-            <div class="card" style="padding: var(--space-lg); border-left: 4px solid var(--color-green);">
-              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <h3 style="font-size: var(--text-lg); font-weight: 600;">Collective Strength</h3>
-              </div>
-              <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Join hands with 1,500+ farmers for stronger market presence.</p>
-            </div>
-
-            <!-- Benefit 6: Capacity Building -->
-            <div class="card" style="padding: var(--space-lg); border-left: 4px solid var(--color-green);">
-              <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-sm);">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-green)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1 3 2 6 2s6-1 6-2v-5"/></svg>
-                <h3 style="font-size: var(--text-lg); font-weight: 600;">Capacity Building</h3>
-              </div>
-              <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Training programs to enhance your goat farming skills.</p>
-            </div>
-
           </div>
         </div>
-
-        <!-- Right: Eligibility Criteria -->
-        <div>
-          <h2 class="section__title">Eligibility Criteria</h2>
-          <p class="section__subtitle">Who can become a member?</p>
-          <div style="margin-top: var(--space-xl);">
-            
-            <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-lg);">
-              <div style="min-width: 24px; min-height: 24px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <p>Resident of Raipur district or nearby blocks, Chhattisgarh</p>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-lg);">
-              <div style="min-width: 24px; min-height: 24px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <p>Individual small or marginal farmer or goat rearer</p>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-lg);">
-              <div style="min-width: 24px; min-height: 24px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <p>Minimum 5 goats (or as per company norms)</p>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-lg);">
-              <div style="min-width: 24px; min-height: 24px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <p>Willingness to follow company guidelines and participate in activities</p>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-lg);">
-              <div style="min-width: 24px; min-height: 24px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <p>Submission of required documents</p>
-            </div>
-
-          </div>
-        </div>
-
       </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="section-divider">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75"/></svg>
     </div>
-  </section>
 
-  <!-- Membership Process Section -->
-  <section class="section" style="background: var(--color-cream-dark);">
-    <div class="container">
-      <h2 class="section__title">Membership Process</h2>
-      <p class="section__subtitle">6 Simple Steps to Join Goat Agri FPC</p>
-      
-      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-lg); margin-top: var(--space-3xl);">
-        
-        <!-- Step 1 -->
-        <div style="text-align: center; position: relative;">
-          <div style="width: 60px; height: 60px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); font-size: var(--text-xl); font-weight: 700; color: white;">1</div>
-          <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-sm);">Apply Online</h3>
-          <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Fill the membership application form with your details</p>
-        </div>
-
-        <!-- Step 2 -->
-        <div style="text-align: center; position: relative;">
-          <div style="width: 60px; height: 60px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); font-size: var(--text-xl); font-weight: 700; color: white;">2</div>
-          <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-sm);">Document Verification</h3>
-          <p style="color: var(--color-text-muted); font-size: var(--text-sm);">We will verify your documents and information</p>
-        </div>
-
-        <!-- Step 3 -->
-        <div style="text-align: center; position: relative;">
-          <div style="width: 60px; height: 60px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); font-size: var(--text-xl); font-weight: 700; color: white;">3</div>
-          <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-sm);">Review & Approval</h3>
-          <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Application will be reviewed by the committee and approved</p>
-        </div>
-
-        <!-- Step 4 -->
-        <div style="text-align: center; position: relative;">
-          <div style="width: 60px; height: 60px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); font-size: var(--text-xl); font-weight: 700; color: white;">4</div>
-          <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-sm);">Pay Membership Fee</h3>
-          <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Pay the membership fee as per the approved category</p>
-        </div>
-
-        <!-- Step 5 -->
-        <div style="text-align: center; position: relative;">
-          <div style="width: 60px; height: 60px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); font-size: var(--text-xl); font-weight: 700; color: white;">5</div>
-          <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-sm);">Membership Confirmation</h3>
-          <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Receive confirmation and welcome kit after approval</p>
-        </div>
-
-        <!-- Step 6 -->
-        <div style="text-align: center; position: relative;">
-          <div style="width: 60px; height: 60px; background: var(--color-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-md); font-size: var(--text-xl); font-weight: 700; color: white;">6</div>
-          <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-sm);">Start Enjoying Benefits</h3>
-          <p style="color: var(--color-text-muted); font-size: var(--text-sm);">Participate in programs and grow together with Goat Agri FPC</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Apply for Membership Section -->
-  <section id="apply" class="section">
-    <div class="container">
-      <h2 class="section__title">Apply for Membership</h2>
-      <p class="section__subtitle">Start your journey with Goat Agri FPC today</p>
-      
-      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-3xl); margin-top: var(--space-3xl);">
-        
-        <!-- Left: Application Form -->
-        <div class="card" style="padding: var(--space-2xl);">
-          <h3 style="font-size: var(--text-xl); font-weight: 600; margin-bottom: var(--space-xl);">Membership Application Form</h3>
-          <form>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+    <!-- Benefits & Eligibility Bento Grid -->
+    <section class="bento-section">
+      <div class="container">
+        <div class="bento-grid">
+          
+          <!-- Benefits Section -->
+          <div>
+            <h3 class="bento-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Benefits of Membership
+            </h3>
+            <div class="benefits-grid">
               
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Full Name *</label>
-                <input type="text" required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base);">
+              <div class="benefit-card">
+                <div class="benefit-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M6 12h.01M18 12h.01"/></svg>
+                </div>
+                <h4 class="benefit-card__title">Better Income</h4>
+                <p class="benefit-card__text">Access to market linkages and value addition opportunities.</p>
               </div>
 
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Mobile Number *</label>
-                <input type="tel" required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base);">
+              <div class="benefit-card">
+                <div class="benefit-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h4 class="benefit-card__title">Expert Support</h4>
+                <p class="benefit-card__text">Training, veterinary care and technical guidance from experts.</p>
               </div>
 
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Email ID</label>
-                <input type="email" style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base);">
+              <div class="benefit-card">
+                <div class="benefit-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                </div>
+                <h4 class="benefit-card__title">Quality Resources</h4>
+                <p class="benefit-card__text">Access to quality breeds, feeds, medicines and inputs.</p>
               </div>
 
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Village *</label>
-                <select required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base); background: white;">
-                  <option value="">Select Village</option>
-                  <option value="village1">Village 1</option>
-                  <option value="village2">Village 2</option>
-                </select>
+              <div class="benefit-card">
+                <div class="benefit-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h4 class="benefit-card__title">Collective Strength</h4>
+                <p class="benefit-card__text">Stronger bargaining power and collective growth as a group.</p>
               </div>
 
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Block *</label>
-                <select required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base); background: white;">
-                  <option value="">Select Block</option>
-                  <option value="block1">Block 1</option>
-                  <option value="block2">Block 2</option>
-                </select>
-              </div>
-
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">District *</label>
-                <select required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base); background: white;">
-                  <option value="">Select District</option>
-                  <option value="raipur">Raipur</option>
-                </select>
-              </div>
-
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">No. of Goats *</label>
-                <input type="number" min="5" required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base);">
-              </div>
-
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Primary Occupation *</label>
-                <select required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base); background: white;">
-                  <option value="">Select Occupation</option>
-                  <option value="farmer">Farmer</option>
-                  <option value="goat_rearer">Goat Rearer</option>
-                  <option value="both">Both</option>
-                </select>
-              </div>
-
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Are you an existing goat rearer? *</label>
-                <select required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-base); background: white;">
-                  <option value="">Select</option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-              </div>
-
-              <div>
-                <label style="display: block; margin-bottom: var(--space-sm); font-weight: 500;">Upload Documents *</label>
-                <input type="file" required style="width: 100%; padding: var(--space-sm) var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-md); font-size: var(--text-sm);">
-              </div>
-
-            </div>
-
-            <div style="margin-top: var(--space-lg); display: flex; align-items: flex-start; gap: var(--space-sm);">
-              <input type="checkbox" id="terms" required style="margin-top: 4px;">
-              <label for="terms" style="font-size: var(--text-sm); color: var(--color-text-muted);">I agree to the terms and conditions of Goat Agri FPC membership</label>
-            </div>
-
-            <button type="submit" class="btn btn--primary btn--lg" style="width: 100%; margin-top: var(--space-xl);">Submit Application</button>
-          </form>
-        </div>
-
-        <!-- Right: Membership Fee Card -->
-        <div>
-          <div class="card" style="padding: var(--space-xl); border: 2px solid var(--color-green); margin-bottom: var(--space-lg);">
-            <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-md); text-align: center;">Membership Fee</h3>
-            <div style="text-align: center; padding: var(--space-lg); background: var(--color-cream-dark); border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
-              <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">Individual Member</p>
-              <p style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-green);">₹1,000</p>
-              <p style="font-size: var(--text-sm); color: var(--color-text-muted);">/Year</p>
-            </div>
-            <div style="text-align: center; padding: var(--space-lg); background: var(--color-cream-dark); border-radius: var(--radius-md);">
-              <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">Group Member</p>
-              <p style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-green);">₹500</p>
-              <p style="font-size: var(--text-sm); color: var(--color-text-muted);">/Year</p>
             </div>
           </div>
 
-          <div class="card" style="padding: var(--space-lg); background: var(--color-green-50); border: 1px solid var(--color-green-100);">
-            <h4 style="font-size: var(--text-base); font-weight: 600; margin-bottom: var(--space-md); color: var(--color-green);">Need Help?</h4>
-            <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-md);">Contact us for any queries about membership</p>
-            <a href="tel:+91-XXXXXXXXXX" style="display: flex; align-items: center; gap: var(--space-sm); color: var(--color-green); font-weight: 500; text-decoration: none;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              +91 XXXXX XXXXX
-            </a>
+          <!-- Eligibility Section -->
+          <div>
+            <h3 class="bento-section-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              Eligibility Criteria
+            </h3>
+            <div class="eligibility-card">
+              <ul class="eligibility-list">
+                <li class="eligibility-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <p>Resident of Raipur district or nearby blocks, Chhattisgarh.</p>
+                </li>
+                <li class="eligibility-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <p>Individual small or marginal farmer or goat rearer.</p>
+                </li>
+                <li class="eligibility-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C9 2 7 4 7 7C7 10 9 12 10 13C11 14 11 15 11 16H13C13 15 13 14 14 13C15 12 17 10 17 7C17 4 15 2 12 2Z"/><path d="M9 16L9 20"/><path d="M15 16L15 20"/><path d="M7 20L17 20"/></svg>
+                  <p>Minimum 5 goats (or as per company norms).</p>
+                </li>
+                <li class="eligibility-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 17a4 4 0 0 1-4-4V7a4 4 0 0 1 8 0v6a4 4 0 0 1-4 4z"/><path d="M17 17a4 4 0 0 1-4-4V7a4 4 0 0 1 8 0v6a4 4 0 0 1-4 4z"/><path d="M7 21h10"/></svg>
+                  <p>Willingness to follow company guidelines and participate in activities.</p>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Membership Process Timeline -->
+    <section class="process-section">
+      <div class="container">
+        <h3 class="process-section__title">Membership Process</h3>
+        <div class="process-timeline">
+          
+          <div class="process-step">
+            <div class="process-step__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span class="process-step__number">1</span>
+            </div>
+            <h4 class="process-step__title">Apply Online</h4>
+            <p class="process-step__text">Fill the membership application form with your details.</p>
+          </div>
+
+          <div class="process-step">
+            <div class="process-step__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg>
+              <span class="process-step__number">2</span>
+            </div>
+            <h4 class="process-step__title">Document Verification</h4>
+            <p class="process-step__text">We will verify your documents and information.</p>
+          </div>
+
+          <div class="process-step">
+            <div class="process-step__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3 3 3-3"/></svg>
+              <span class="process-step__number">3</span>
+            </div>
+            <h4 class="process-step__title">Review &amp; Approval</h4>
+            <p class="process-step__text">Application will be reviewed by the committee and approved.</p>
+          </div>
+
+          <div class="process-step process-step--highlight">
+            <div class="process-step__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path d="M6 12h.01M18 12h.01"/></svg>
+              <span class="process-step__number">4</span>
+            </div>
+            <h4 class="process-step__title">Pay Membership Fee</h4>
+            <p class="process-step__text">Pay the membership fee as per the approved category.</p>
+          </div>
+
+          <div class="process-step">
+            <div class="process-step__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              <span class="process-step__number">5</span>
+            </div>
+            <h4 class="process-step__title">Membership Confirmation</h4>
+            <p class="process-step__text">Receive confirmation and welcome kit after approval.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Apply for Membership Section -->
+    <section id="apply" class="section">
+      <div class="container">
+        <h2 class="section__title" style="text-align:center;">Apply for Membership</h2>
+        <div class="decorative-line"></div>
+        <p class="section__subtitle" style="text-align:center;">Start your journey with Goat Agri FPC today</p>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-3xl); margin-top: var(--space-3xl);">
+          
+          <!-- Left: Application Form -->
+          <div class="card" style="padding: var(--space-2xl);">
+            <h3 style="font-size: var(--text-xl); font-weight: 600; margin-bottom: var(--space-xl);">Membership Application Form</h3>
+            <form>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg);">
+                
+                <div class="form-group">
+                  <label class="form-label">Full Name *</label>
+                  <input type="text" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Mobile Number *</label>
+                  <input type="tel" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Email ID</label>
+                  <input type="email" class="form-input">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Village *</label>
+                  <select class="form-select" required>
+                    <option value="">Select Village</option>
+                    <option value="village1">Village 1</option>
+                    <option value="village2">Village 2</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Block *</label>
+                  <select class="form-select" required>
+                    <option value="">Select Block</option>
+                    <option value="block1">Block 1</option>
+                    <option value="block2">Block 2</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">District *</label>
+                  <select class="form-select" required>
+                    <option value="">Select District</option>
+                    <option value="raipur">Raipur</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">No. of Goats *</label>
+                  <input type="number" class="form-input" min="5" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Primary Occupation *</label>
+                  <select class="form-select" required>
+                    <option value="">Select Occupation</option>
+                    <option value="farmer">Farmer</option>
+                    <option value="goat_rearer">Goat Rearer</option>
+                    <option value="both">Both</option>
+                  </select>
+                </div>
+
+              </div>
+
+              <div style="margin-top: var(--space-lg); display: flex; align-items: flex-start; gap: var(--space-sm);">
+                <input type="checkbox" id="terms" required style="margin-top: 4px;">
+                <label for="terms" style="font-size: var(--text-sm); color: var(--color-text-muted);">I agree to the terms and conditions of Goat Agri FPC membership</label>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--lg" style="width: 100%; margin-top: var(--space-xl);">Submit Application</button>
+            </form>
+          </div>
+
+          <!-- Right: Membership Fee Card -->
+          <div>
+            <div class="card" style="padding: var(--space-xl); border: 2px solid var(--color-green); margin-bottom: var(--space-lg);">
+              <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-md); text-align: center;">Membership Fee</h3>
+              <div style="text-align: center; padding: var(--space-lg); background: var(--color-cream-dark); border-radius: var(--radius-md); margin-bottom: var(--space-lg);">
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">Individual Member</p>
+                <p style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-green);">₹1,000</p>
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted);">/Year</p>
+              </div>
+              <div style="text-align: center; padding: var(--space-lg); background: var(--color-cream-dark); border-radius: var(--radius-md);">
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">Group Member</p>
+                <p style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-green);">₹500</p>
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted);">/Year</p>
+              </div>
+            </div>
+
+            <div class="card" style="padding: var(--space-lg); background: var(--color-green-50); border: 1px solid var(--color-green-100);">
+              <h4 style="font-size: var(--text-base); font-weight: 600; margin-bottom: var(--space-md); color: var(--color-green);">Need Help?</h4>
+              <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-md);">Contact us for any queries about membership</p>
+              <a href="tel:+91-XXXXXXXXXX" style="display: flex; align-items: center; gap: var(--space-sm); color: var(--color-green); font-weight: 500; text-decoration: none;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +91 XXXXX XXXXX
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
   </main>
 
