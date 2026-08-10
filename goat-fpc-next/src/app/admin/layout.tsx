@@ -9,14 +9,17 @@ function AuthGate({ children }: { children: React.ReactNode }) {
   const { auth } = useAdmin();
   const router = useRouter();
   const pathname = usePathname();
+  // Normalize trailing slash (static export serves /admin/login/)
+  const normalizedPath = pathname ? pathname.replace(/\/+$/, "") || "/" : pathname;
+  const isLoginPage = normalizedPath === "/admin/login";
 
   useEffect(() => {
-    if (!auth.loggedIn && pathname !== "/admin/login") {
+    if (!auth.loggedIn && !isLoginPage) {
       router.replace("/admin/login");
     }
-  }, [auth.loggedIn, pathname, router]);
+  }, [auth.loggedIn, isLoginPage, router]);
 
-  if (!auth.loggedIn && pathname !== "/admin/login") {
+  if (!auth.loggedIn && !isLoginPage) {
     return (
       <div className="flex h-screen items-center justify-center bg-gray-100">
         <div className="flex items-center gap-3 text-gray-500">

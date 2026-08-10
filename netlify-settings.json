@@ -1,7 +1,0 @@
-{
-  "build_settings": {
-    "base": "goat-fpc-next",
-    "command": "npm run build",
-    "publish": "goat-fpc-next/.next"
-  }
-}
