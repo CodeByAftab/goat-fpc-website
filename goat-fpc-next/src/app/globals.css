@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-playfair);
+  --font-serif: var(--font-playfair);
+
+  /* Exact Reference Colors */
+  --color-primary: #1B5E20;
+  --color-primary-hover: #2E7D32;
+  --color-primary-light: #4CAF50;
+  --color-primary-foreground: #FFFFFF;
+
+  --color-terracotta: #A0522D;
+  --color-terracotta-light: #C75B12;
+
+  --color-cream: #FDF8F0;
+  --color-cream-dark: #F5ECD7;
+  --color-white: #FFFFFF;
+
+  --color-text-dark: #1A1A1A;
+  --color-text-body: #4A4A4A;
+  --color-text-muted: #6B6B6B;
+  --color-text-light: #9B9B9B;
+
+  --color-border-light: #E8E0D4;
+  --color-border-card: #F0E8DC;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow-md: 0 2px 8px -1px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 4px 16px -2px rgb(0 0 0 / 0.08);
+  --shadow-card: 0 2px 12px rgb(0 0 0 / 0.04);
+
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+:root {
+  --background: #FDF8F0;
+  --foreground: #1A1A1A;
+}
+
+@layer base {
+  * {
+    @apply border-border-light;
+  }
+  body {
+    @apply bg-background text-text-dark font-sans;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading text-text-dark;
+  }
+}
+
+@layer utilities {
+  .container-custom {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .section-padding {
+    @apply py-12 md:py-16;
+  }
+}
+
+/* Green Circle Icon */
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1B5E20;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.icon-circle-sm {
+  width: 40px;
+  height: 40px;
+}
+
+.icon-circle:hover {
+  background: #2E7D32;
+  transform: translateY(-1px);
+}
+
+/* Card Styles */
+.card-clean {
+  background: white;
+  border: 1px solid #F0E8DC;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.card-clean:hover {
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.06);
+  border-color: #E8E0D4;
+}
+
+/* Button Styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  background: #1B5E20;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #2E7D32;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  background: transparent;
+  color: #1A1A1A;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid #1A1A1A;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background: #1A1A1A;
+  color: white;
+}
+
+/* Input Styles */
+.input-clean {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #E8E0D4;
+  border-radius: 6px;
+  font-size: 13px;
+  background: white;
+  transition: border-color 0.3s ease;
+}
+
+.input-clean:focus {
+  outline: none;
+  border-color: #1B5E20;
+}
+
+.input-clean::placeholder {
+  color: #9B9B9B;
+}
+
+/* Tricolor */
+.tricolor-stripe {
+  display: flex;
+  height: 3px;
+  width: 100%;
+}
+.tricolor-stripe .saffron { flex: 1; background-color: #FF9933; }
+.tricolor-stripe .white { flex: 1; background-color: #FFFFFF; }
+.tricolor-stripe .green { flex: 1; background-color: #138808; }
