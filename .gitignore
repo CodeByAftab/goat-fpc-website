@@ -24,3 +24,6 @@ node_modules/
 *.pdf
 memory.md
 .claude/
+
+# Local Netlify folder
+.netlify

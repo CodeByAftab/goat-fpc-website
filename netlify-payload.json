@@ -1,0 +1,9 @@
+{
+  "site_id": "f86db159-a762-4379-87bf-c9cf57536a9d",
+  "build_settings": {
+    "base": "goat-fpc-next",
+    "dir": "goat-fpc-next",
+    "cmd": "npm run build",
+    "publish": "goat-fpc-next/.next"
+  }
+}

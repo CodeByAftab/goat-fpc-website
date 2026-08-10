@@ -1,9 +1,0 @@
-[build]
-  base = "goat-fpc-next"
-  command = "npm run build"
-  publish = ".next"
-
-[[redirects]]
-  from = "/*"
-  to = "/404"
-  status = 404
